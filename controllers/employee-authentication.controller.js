@@ -125,6 +125,7 @@ exports.forgot = (req, res, next) => {
             "\n\n" +
             "If you did not request this, please ignore this email and your password will remain unchanged.\n"
         };
+
         smtpTransport.sendMail(mailOptions, function(err) {
           if (err) return next(err);
 
