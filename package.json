@@ -1,0 +1,33 @@
+{
+  "name": "node_login",
+  "version": "1.0.0",
+  "description": "node express mongo login code snippet",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./app.js",
+    "webpack": "cross-env NODE_ENV=development webpack"
+  },
+  "author": "Nikhil",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.14",
+    "nodemon": "^1.18.4"
+  },
+  "devDependencies": {
+    "async": "^2.6.1",
+    "bcryptjs": "^2.4.3",
+    "cross-env": "^5.2.0",
+    "crypto": "^1.0.1",
+    "jwt-simple": "^0.5.1",
+    "morgan": "^1.9.1",
+    "nodemailer": "^4.6.8",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "webpack": "^4.18.0",
+    "webpack-cli": "^3.1.0",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
