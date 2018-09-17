@@ -16,4 +16,5 @@ module.exports = app => {
   app.post("/login", requireLogin, employee_authentication_controller.login);
   app.post("/register", employee_authentication_controller.register);
   app.post("/forgot", employee_authentication_controller.forgot);
+  app.post("/reset/:token", employee_authentication_controller.reset);
 };

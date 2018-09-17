@@ -138,6 +138,86 @@ exports.forgot = (req, res, next) => {
   );
 };
 
+exports.reset = (req, res) => {
+  async.waterfall(
+    [
+      function(done) {
+        User.findOne(
+          {
+            resetPasswordToken: req.params.token,
+            resetPasswordExpires: { $gt: Date.now() }
+          },
+          function(err, user) {
+            if (!user) {
+              return res.redirect("back");
+            }
+
+            // Generate a salt and then callback
+            bcrypt.genSalt(10, (err, salt) => {
+              if (err) {
+                return next(err);
+              }
+              // Hash our password using salt
+              bcrypt.hash(req.body.password, salt, (err, hash) => {
+                if (err) {
+                  return next(err);
+                }
+
+                // overwright plain text password with encrypted passwords
+                user.password = hash;
+                user.resetPasswordToken = undefined;
+                user.resetPasswordExpires = undefined;
+
+                user.save(err => {
+                  if (err) {
+                    return next(err);
+                  }
+                  // respond to request indication user was created
+                  res.json({ token: tokenForUser(user) });
+                  done(err, user);
+                });
+              });
+            });
+          }
+        );
+      },
+      function(user, done) {
+        var smtpTransport = nodemailer.createTransport({
+          service: "Gmail",
+          auth: {
+            type: "OAuth2",
+            user: secret.gmail.senderMailId,
+            clientId: secret.gmail.clientId,
+            clientSecret: secret.gmail.clientSecret,
+            refreshToken: secret.gmail.refreshToken,
+            accessToken: secret.gmail.accessToken
+          }
+        });
+
+        var mailOptions = {
+          to: user.email,
+          from: secret.gmail.senderMailId,
+          subject: "Your password has been changed",
+          text:
+            "Hello,\n\n" +
+            "This is a confirmation that the password for your account " +
+            user.email +
+            " has just been changed.\n"
+        };
+
+        smtpTransport.sendMail(mailOptions, function(err) {
+          if (err) return next(err);
+
+          res.json({ success: "Success! Your password has been changed." });
+        });
+      }
+    ],
+    function(err) {
+      res.redirect("/");
+    }
+  );
+};
+
 exports.test = (req, res, next) => {
   res.send("Test Controller");
 };

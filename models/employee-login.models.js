@@ -5,7 +5,9 @@ const bcrypt = require("bcryptjs");
 // Define login models
 let UserSchema = new Schema({
   email: { type: String, unique: true, lowercase: true, required: true },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 });
 
 UserSchema.methods.comparePassword = (candidatePassword, user, callback) => {
