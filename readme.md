@@ -1,53 +1,43 @@
-to build `npm run webpack`
-to start server `npm start`
+> **To build** `npm run webpack`<br />
+> **To start server** `npm start`
 
-### Authentication Tech Stack :--------------------
+## Authentication Tech Stack :--------------------
 
--------------------------------------------------------------- |------------------|
--------------------------------------------------------------- |------Bcrypt------|
--------------------------------------------------------------- |------------------|
--------------------------------------------------------------- |---Storing User---|
--------------------------------------------------------------- |-----password-----|
--------------------------------------------------------------- |------Safely------|
+| Low-level request handling          | Routing, Server logic                          | Database                        | Authentication                                                 |
+| ----------------------------------- | ---------------------------------------------- | ------------------------------- | -------------------------------------------------------------- |
+| :x:                                 | :x:                                            | :x:                             | Bcrypt (Storing User password Safely)                          |
+| :x:                                 | Body Parser (help parse incoming http request) | :x:                             | Passport JWT (Authenticating users with a JWT)                 |
+| :x:                                 | Morgan (logging)                               | MongoDB (Storing data)          | Passport Local (Authenticating users with a username/password) |
+| HTTP Module (handling HTTP request) | Express (Parse response + routing)             | Mongoose (Working with MongoDB) | Bcrypt (Storing User password Safely)                          |
 
--------------------- |------------------| -------------------- |------------------|
--------------------- |----Body Parser---| -------------------- |---Passport JWT---|
--------------------- |------------------| -------------------- |------------------|
--------------------- |----help parse----| -------------------- |--Authenticating--|
--------------------- |--incoming http---| -------------------- |----users with----|
--------------------- |------request-----| -------------------- |------a JWT-------|
+<br />
+<br />
+<br />
+---
+---
+---
+<br />
+<br />
+<br />
 
--------------------- |------------------| |------------------| |------------------|
--------------------- |------Morgan------| |-----MongoDB------| |--Passport Local--|
--------------------- |------------------| |------------------| |------------------|
--------------------- |-----logging------| |---Storing data---| |--Authenticating--|
--------------------- |------------------| |------------------| |---users with a---|
--------------------- |------------------| |------------------| |-username/password|
 
-|------------------| |------------------| |------------------| |------------------|
-|---HTTP Module----| |-----Express------| |-----Mongoose-----| |----Passport JS---|
-|------------------| |------------------| |------------------| |------------------|
-|---handling HTTP--| |--Parse response--| |---Working with---| |--Authenticating--|
-|------request-----| |----+ routing-----| |-----MongoDB------| |------users-------|
-|------------------| |------------------| |------------------| |------------------|
+# MongoDB Commands :------------------------------------
 
-Low-level request-----Routing, Server logic------Database-----------Authentication
-handling
+## Start your MongoDB database
 
-## MongoDB Commands :------------------------------------
+> ### `"C:\Program Files\MongoDB\Server\4.0\bin\mongod.exe" --dbpath="c:\data\db"`
 
-###### Start your MongoDB database
+## Connect to MongoDB
 
-`"C:\Program Files\MongoDB\Server\4.0\bin\mongod.exe" --dbpath="c:\data\db"`
+> ### `"C:\Program Files\MongoDB\Server\4.0\bin\mongo.exe"`
 
-###### Connect to MongoDB
+## Start the MongoDB service.
 
-`"C:\Program Files\MongoDB\Server\4.0\bin\mongo.exe"`
+> ### `net start MongoDB`
 
-###### Start the MongoDB service.
+## Stop the MongoDB service.
 
-`net start MongoDB`
+> ### `net stop MongoDB`
 
-###### Stop the MongoDB service.
 
-`net stop MongoDB`
+https://email-templates.js.org/#/
